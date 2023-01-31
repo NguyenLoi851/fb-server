@@ -5,7 +5,6 @@ const postLikeController = {};
 
 postLikeController.action = async (req, res, next) => {
     try {
-        console.log("like hello")
         let userId = req.userId;
         let post = await PostModel.findById(req.params.postId);
         if (post == null) {

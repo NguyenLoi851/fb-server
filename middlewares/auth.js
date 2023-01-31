@@ -4,6 +4,7 @@ const httpStatus = require("../utils/httpStatus");
 
 const auth = async (req, res, next) => {
   try {
+    // console.log("req", req)
     // console.log("GG", req.headers.authorization)
     let authorization = req.headers.authorization.split(' ')[1], decoded;
     try {
@@ -19,6 +20,7 @@ const auth = async (req, res, next) => {
     try {
         user = await UserModel.findById(userId);
         if (user == null) {
+            // console.log("daay")
             return res.status(httpStatus.UNAUTHORIZED).json({
                 message: "UNAUTHORIZED"
             });
