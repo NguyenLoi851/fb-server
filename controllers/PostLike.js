@@ -5,6 +5,7 @@ const postLikeController = {};
 
 postLikeController.action = async (req, res, next) => {
     try {
+        console.log("like hello")
         let userId = req.userId;
         let post = await PostModel.findById(req.params.postId);
         if (post == null) {
@@ -36,6 +37,7 @@ postLikeController.action = async (req, res, next) => {
             data: post
         });
     } catch (error) {
+        console.log(error)
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message: error.message});
     }
 }

@@ -37,7 +37,7 @@ const usersSchema = new mongoose.Schema({
         default: GENDER_SECRET,
     },
     birthday: {
-        type: Number,
+        type: String,
         required: false
     },
     description: {

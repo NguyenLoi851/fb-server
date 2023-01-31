@@ -4,6 +4,7 @@ const httpStatus = require("../utils/httpStatus");
 
 const auth = async (req, res, next) => {
   try {
+    // console.log("GG", req.headers.authorization)
     let authorization = req.headers.authorization.split(' ')[1], decoded;
     try {
         decoded = jwt.verify(authorization, process.env.JWT_SECRET);
@@ -29,6 +30,7 @@ const auth = async (req, res, next) => {
     req.userId = userId;
     next();
   } catch (err) {
+    console.log(err)
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message: err.message});
   }
 };

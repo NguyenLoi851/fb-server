@@ -19,10 +19,13 @@ postsController.create = async (req, res, next) => {
             images,
             videos,
         } = req.body;
+        console.log(described)
+        console.log(req.body)
         let dataImages = [];
         if (Array.isArray(images)) {
+            console.log("mang image")
             for (const image of images) {
-                if (uploadFile.matchesFileBase64(image) !== false) {
+                // if (uploadFile.matchesFileBase64(image) !== false) {
                     const imageResult = uploadFile.uploadFile(image);
                     if (imageResult !== false) {
                         let imageDocument = new DocumentModel({
@@ -35,7 +38,7 @@ postsController.create = async (req, res, next) => {
                             dataImages.push(savedImageDocument._id);
                         }
                     }
-                }
+                // }
             }
         }
 
@@ -43,7 +46,7 @@ postsController.create = async (req, res, next) => {
         if (Array.isArray(videos)) {
             for (const video of videos) {
 		console.log('video 1')
-                if (uploadFile.matchesFileBase64(video) !== false) {
+                // if (uploadFile.matchesFileBase64(video) !== false) {
 		    console.log('video 2')
                     const videoResult = uploadFile.uploadFile(video);
                     if (videoResult !== false) {
@@ -58,7 +61,7 @@ postsController.create = async (req, res, next) => {
                             dataVideos.push(savedVideoDocument._id);
                         }
                     }
-                }
+                // }
             }
         }
 
@@ -84,6 +87,7 @@ postsController.create = async (req, res, next) => {
             data: postSaved
         });
     } catch (e) {
+        console.log(e)
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
             message: e.message
         });
