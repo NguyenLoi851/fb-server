@@ -37,8 +37,8 @@ usersController.register = async (req, res, next) => {
             username: username,
             email: email,
             birthday: birthday,
-            avatar: "60c39f54f0b2c4268eb53367",
-            cover_image: "60c39eb8f0b2c4268eb53366"
+            avatar: "",
+            cover_image: ""
         });
 
         try {
@@ -115,6 +115,8 @@ usersController.login = async (req, res, next) => {
                 id: user._id,
                 phonenumber: user.phonenumber,
                 username: user.username,
+                cover_image:user.cover_image,
+                avatar:user.avatar
             },
             token: token
         })

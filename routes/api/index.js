@@ -7,6 +7,7 @@ const postReportRoutes = require("../PostReport");
 const postsRoutes = require("../Posts");
 const chatsRoutes = require("../Chats");
 const searchRoutes = require("../Searchs");
+const documentRoutes = require("../Document");
 
 const apiRoutes = express.Router();
 
@@ -18,6 +19,13 @@ apiRoutes.use("/postReport", postReportRoutes);
 apiRoutes.use("/posts", postsRoutes);
 apiRoutes.use("/chats", chatsRoutes);
 apiRoutes.use("/search", searchRoutes);
+
+
+
+apiRoutes.use("/document", documentRoutes);
+
+
+
 
 apiRoutes.get(
     "/", (req, res) => res.json({ api: "is-working" })

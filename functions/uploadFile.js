@@ -26,7 +26,7 @@ uploadFile.uploadFile = (fileBase64) => {
     }
 
     response.type = matches[1];
-    response.data = new Buffer(matches[2], 'base64');
+    response.data = new Buffer.from(matches[2], 'base64');
     let decodedImg = response;
     let imageBuffer = decodedImg.data;
     let type = decodedImg.type;
