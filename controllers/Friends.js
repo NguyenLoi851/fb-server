@@ -119,7 +119,7 @@ friendsController.setAccept = async (req, res, next) => {
         friend.save();
         let newStatus = ''
         let mes;
-        if (req.body.is_accept === '1') {
+        if (req.body.is_accept == '1') {
             mes = "Kết bạn thành công";
             newStatus = 'friend'
         } else {
