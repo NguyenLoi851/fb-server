@@ -59,8 +59,8 @@ usersController.register = async (req, res, next) => {
                     birthday: birthday,
                     // avatar: avatar,
                     // cover_image: coverImage,
-                    avatar: "60c39f54f0b2c4268eb53367",
-                    cover_image: "60c39eb8f0b2c4268eb53366"
+                    avatar: "63e50a7150c60a164804afc8",
+                    cover_image: "63e50a7150c60a164804afc8"
                 },
                 token: token
             })
@@ -422,6 +422,19 @@ usersController.searchUser = async (req, res, next) => {
             data: result
         });
 
+    } catch (e) {
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: e.message
+        });
+    }
+}
+
+usersController.list = async(req, res, next) => {
+    try {
+        const users = await UserModel.find()
+    return res.status(200).json({
+        data: users
+    })
     } catch (e) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
             message: e.message
