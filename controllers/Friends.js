@@ -5,6 +5,7 @@ const httpStatus = require("../utils/httpStatus");
 const bcrypt = require("bcrypt");
 const { JWT_SECRET } = require("../constants/constants");
 const { ROLE_CUSTOMER } = require("../constants/constants");
+const { request } = require("express");
 const friendsController = {};
 
 // 0: gửi lời mời
@@ -72,6 +73,42 @@ friendsController.getRequest = async (req, res, next) => {
         let receiver = req.userId;
         let requested = await FriendModel.find({ receiver: receiver, status: "0" }).distinct('sender')
         let users = await UserModel.find().where('_id').in(requested).populate('avatar').populate('cover_image').exec()
+
+        res.status(200).json({
+            code: 200,
+            message: "Danh sách lời mời kết bạn",
+            data: {
+                friends: users,
+            }
+        });
+    } catch (e) {
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            message: e.message
+        });
+    }
+}
+
+friendsController.getAllNotInRequest = async (req, res, next) => {
+    try {
+        let receiver = req.userId;
+        // let requested = await FriendModel.find({ receiver: receiver, status: { $in: ["0", "1"] } }).distinct('sender')
+        // let requested = await FriendModel.find({
+        //     $and: [
+                
+                    
+        //                 {receiver: req.userId}
+                    
+        //         ,
+        //         {status: { $in: ["0", "1"] }}
+        //     ]
+        // })
+        let requested = await FriendModel.find({ sender: req.userId, status: { $in: ["0", "1"] }}).distinct('receiver')
+        let accepted = await FriendModel.find({ receiver: req.userId, status: { $in: ["0", "1"] } }).distinct('sender')
+        requested.push(receiver)
+
+        let users = await UserModel.find().where('_id').nin(requested.concat(accepted)).populate('avatar').populate('cover_image').exec()
+
+        // let users = await UserModel.find().where('_id').nin(requested).populate('avatar').populate('cover_image').exec()
 
         res.status(200).json({
             code: 200,

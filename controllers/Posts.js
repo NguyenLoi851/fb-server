@@ -219,9 +219,16 @@ postsController.delete = async (req, res, next) => {
         if (post == null) {
             return res.status(httpStatus.NOT_FOUND).json({message: "Can not find post"});
         }
-        return res.status(httpStatus.OK).json({
+        if(post.author == req.userId){
+            return res.status(httpStatus.OK).json({
             message: 'Delete post done',
         });
+        }else{
+            return res.status(httpStatus.BAD_REQUEST).json({
+                message: "not owner"
+            })
+        }
+        
     } catch (error) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({message: error.message});
     }

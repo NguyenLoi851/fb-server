@@ -10,8 +10,9 @@ friendsRoutes.get("/get-requested-friend", auth, friendController.getRequest);
 friendsRoutes.post("/set-accept", auth, friendController.setAccept);
 friendsRoutes.post("/cancel-request", auth, friendController.cancelRequest);
 friendsRoutes.post("/set-remove", auth, friendController.setRemoveFriend);
-friendsRoutes.post("/list", auth, friendController.listFriends);
+friendsRoutes.get("/list", auth, friendController.listFriends);
 friendsRoutes.get("/list_requests", auth, friendController.listRequests);
 friendsRoutes.get("/status/:friendId", auth, friendController.friendStatus);
+friendsRoutes.get("/listnot", auth, friendController.getAllNotInRequest);
 
 module.exports = friendsRoutes;
