@@ -102,7 +102,7 @@ friendsController.getAllNotInRequest = async (req, res, next) => {
         //         {status: { $in: ["0", "1"] }}
         //     ]
         // })
-        let requested = await FriendModel.find({ sender: req.userId, status: { $in: ["0", "1"] }}).distinct('receiver')
+        let requested = await FriendModel.find({ sender: req.userId, status: { $in: ["1"] }}).distinct('receiver')
         let accepted = await FriendModel.find({ receiver: req.userId, status: { $in: ["0", "1"] } }).distinct('sender')
         requested.push(receiver)
 

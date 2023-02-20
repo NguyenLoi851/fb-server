@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
     }
     // socket.emit('message', 'Hello world');
     socket.on('disconnect', () => {
+        console.log("a user disconnected")
         let userId = mapSocketIds[socket.id];
         if (socketIds[userId]) {
             for (let i = 0; i < socketIds[userId].length; i++) {
